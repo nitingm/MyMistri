@@ -10,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.codingskillshub.mymistri.calculator.ui.home.HomeScreen
+import com.codingskillshub.mymistri.calculator.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -17,7 +18,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            HomeScreen()
+            AppTheme {
+                HomeScreen()
+            }
         }
     }
 }
