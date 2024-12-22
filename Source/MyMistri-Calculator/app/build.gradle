@@ -4,14 +4,6 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('E:\\StartupProjects\\KeyStore\\CodingSkillsGooglePlayKeystore.jks')
-            keyAlias 'cshubplaystorekey'
-            keyPassword 'cool@123'
-            storePassword 'cool@123'
-        }
-    }
     namespace 'com.codingskillshub.mymistri.calculator'
     compileSdk 34
 
