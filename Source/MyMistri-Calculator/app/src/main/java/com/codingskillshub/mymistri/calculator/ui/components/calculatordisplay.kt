@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -18,14 +19,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.TextStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
+
+import com.codingskillshub.mymistri.calculator.ui.theme.AppTheme
 
 @Composable
 fun CalculatorDisplay(
     inputExpression: String = "",
     outputValue: String = "",
-    onInputExpressionChanged: (String) -> Unit
+    onInputExpressionChanged: (String) -> Unit,
+    inputExpressionColor: Color = MaterialTheme.colorScheme.onSurface,
+    outputValueColor: Color = MaterialTheme.colorScheme.onSurface
 )
 {
 //    var text by remember { mutableStateOf(TextFieldValue(""))}
@@ -39,7 +45,7 @@ fun CalculatorDisplay(
                 onValueChange = { newExpression ->
                     onInputExpressionChanged(newExpression)
                 } ,
-
+                readOnly = true,
                 keyboardOptions = KeyboardOptions(showKeyboardOnFocus = false),
                 modifier = Modifier
                 .fillMaxWidth()
@@ -49,12 +55,12 @@ fun CalculatorDisplay(
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
                     unfocusedContainerColor = Color.Transparent, // Set container color to transparent
-                    focusedTextColor = Color.Black,
-                    unfocusedTextColor = Color.Black, // Set text color to black (or your desired color)
+                    focusedTextColor = inputExpressionColor,
+                    unfocusedTextColor = inputExpressionColor, // Set text color to black (or your desired color)
                     focusedIndicatorColor = Color.Transparent, // Remove focus indicator
                     unfocusedIndicatorColor = Color.Transparent // Remove unfocused indicator
                 ),
-                textStyle = androidx.compose.ui.text.TextStyle(textAlign = TextAlign.End)
+                textStyle = MaterialTheme.typography.titleLarge.merge(textAlign = TextAlign.End)
             )
             Text(
                 text = outputValue,
@@ -62,10 +68,10 @@ fun CalculatorDisplay(
                     .size(300.dp, 80.dp)
                     .layoutId("outputText")
                     .padding(0.dp, 10.dp,5.dp,0.dp),
-                textAlign = TextAlign.End
+                textAlign = TextAlign.End,
+                color = outputValueColor,
+                style = MaterialTheme.typography.bodyLarge
             )
-
-
         }
     }
 }

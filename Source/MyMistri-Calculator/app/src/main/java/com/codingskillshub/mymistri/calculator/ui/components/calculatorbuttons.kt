@@ -8,13 +8,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.android.material.chip.Chip
-
+import com.codingskillshub.mymistri.calculator.ui.theme.AppTheme
 //import java.lang.reflect.Modifier
 
 @Composable
@@ -27,7 +28,8 @@ fun NumberButton(
         modifier = Modifier.size(80.dp)
     ) {
         Text(
-            text = buttonKey
+            text = buttonKey,
+            style = MaterialTheme.typography.titleLarge
         )
     }
 }
@@ -42,7 +44,8 @@ fun OperationButton(
         modifier = Modifier.size(80.dp)
     ) {
         Text(
-            text = buttonKey
+            text = buttonKey,
+            style = MaterialTheme.typography.titleLarge
         )
     }
 }
@@ -57,7 +60,8 @@ fun ClearButton(
         modifier = Modifier.size(80.dp)
     ) {
         Text(
-            text = buttonKey
+            text = buttonKey,
+            style = MaterialTheme.typography.titleLarge
         )
     }
 }
@@ -72,7 +76,8 @@ fun EqualButton(
         modifier = Modifier.size(170.dp, 80.dp)
     ) {
         Text(
-            text = buttonKey
+            text = buttonKey,
+            style = MaterialTheme.typography.titleLarge
         )
     }
 }
@@ -86,6 +91,7 @@ fun BackspaceButton(
     ) {
         Icon(
             imageVector = Icons.Filled.Backspace,
+            tint = MaterialTheme.colorScheme.onSecondaryContainer,
             contentDescription = "Backspace"
         )
     }
@@ -98,49 +104,72 @@ fun ModeChip(
 ) {
     AssistChip(
         onClick = onClick,
-        label = { Text(modeName) }
+        label = { Text(modeName,
+            style = MaterialTheme.typography.titleLarge)
+        }
     )
 }
 
 @Preview
 @Composable
 fun PreviewNumberButton() {
-    NumberButton(
-        onClick = {},
-        buttonKey = "1"
-    )
+    AppTheme {
+        NumberButton(
+            onClick = {},
+            buttonKey = "1"
+        )
+    }
 }
 
 @Preview
 @Composable
 fun PreviewEqualButton() {
-    EqualButton(
-        onClick = {}
-    )
+    AppTheme {
+        EqualButton(
+            onClick = {}
+        )
+    }
 }
 
 @Preview
 @Composable
 fun PreviewOperationButton() {
-    OperationButton(
-        onClick = {},
-        buttonKey = "+"
-    )
+    AppTheme {
+        OperationButton(
+            onClick = {},
+            buttonKey = "x"
+        )
+    }
 }
 
 @Preview
 @Composable
 fun PreviewClearButton() {
-    ClearButton(
-        onClick = {},
-        buttonKey = "C"
-    )
+    AppTheme {
+        ClearButton(
+            onClick = {},
+            buttonKey = "C"
+        )
+    }
 }
 
 @Preview
 @Composable
 fun PreviewBackspaceButton() {
-    BackspaceButton(
-        onClick = {}
-    )
+    AppTheme {
+        BackspaceButton(
+            onClick = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PreviewModeChip() {
+    AppTheme {
+        ModeChip(
+            onClick = {},
+            modeName = "Length"
+        )
+    }
 }

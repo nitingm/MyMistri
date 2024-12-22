@@ -1,11 +1,13 @@
 package com.codingskillshub.mymistri.calculator.ui.home
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -15,13 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.material3.MaterialTheme
 
 import com.codingskillshub.mymistri.calculator.ui.components.*
+import com.codingskillshub.mymistri.calculator.ui.theme.AppTheme
 import com.codingskillshub.mymistri.calculator.viewmodels.CalculatorViewModel
 import com.codingskillshub.mymistri.calculator.viewmodels.Mode
 import kotlinx.coroutines.launch
-
-//import com.codingskillshub.mymistri.calculator.databinding.FragmentHomeBinding
 
 @Composable
 fun HomeScreen(
@@ -50,7 +52,12 @@ fun HomeScreen(
             CalculatorDisplay(
                 inputExpression = calculatorViewModel.inputExpression,
                 outputValue = calculatorViewModel.outputValue,
-                {value -> calculatorViewModel.updateInputExpression(value) }
+                {value -> calculatorViewModel.updateInputExpression(value) },
+                inputExpressionColor = if(calculatorViewModel.isExpressionValid)
+                    MaterialTheme.colorScheme.onSurface
+                else
+                    MaterialTheme.colorScheme.error,
+                outputValueColor = MaterialTheme.colorScheme.onSurface
             )
         }
 
@@ -62,8 +69,10 @@ fun HomeScreen(
             BackspaceButton(onClick = {calculatorViewModel.removeLastChar()})
         }
 
-        Divider(modifier = Modifier.fillMaxWidth(),
-            thickness = 1.dp)
+        HorizontalDivider(
+            modifier = Modifier.fillMaxWidth(),
+            thickness = 1.dp
+        )
         Row(
             Modifier
                 .fillMaxWidth()
@@ -121,9 +130,12 @@ fun HomeScreen(
 }
 
 @Preview(showBackground = true, showSystemUi = true)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, showSystemUi = true, name = "Dark mode")
 @Composable
 fun HomeScreenPreview(
 
-){
-    HomeScreen()
+) {
+    AppTheme {
+        HomeScreen()
+    }
 }
